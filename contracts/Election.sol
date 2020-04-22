@@ -17,6 +17,10 @@ contract Election {
   // Store candidates count
   uint public candidatesCount;
 
+  event votedEvent (
+    uint indexed _candidateId
+  );
+
   // Run everytime we init our contract with migrations
   constructor() public {
     addCandidate('Candidate 1');
@@ -40,5 +44,8 @@ contract Election {
 
     // Update candidate's vote
     candidates[_candidateId].voteCount ++;
+
+    // Trigger voted event
+    emit votedEvent(_candidateId);
   }
 }
